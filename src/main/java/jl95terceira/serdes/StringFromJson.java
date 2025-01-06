@@ -3,7 +3,7 @@ package jl95terceira.serdes;
 import jl95terceira.lang.variadic.*;
 
 /**
- * The reverter for {@link jl95terceira.data.c.StringToJsonValue}.
+ * The reverter for {@link jl95terceira.serdes.StringToJson}.
  */
 public class StringFromJson {
     
