@@ -1,6 +1,6 @@
 package jl95terceira.lang.variadic;
 
-import static jl95terceira.lang.SuperPowers.*;
+import static jl95terceira.lang.stt.*;
 import jl95terceira.lang.*;
 
 /**

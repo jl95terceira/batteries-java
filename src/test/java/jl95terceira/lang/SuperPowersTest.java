@@ -1,6 +1,6 @@
 package jl95terceira.lang;
 
-import static jl95terceira.lang.SuperPowers.*;
+import static jl95terceira.lang.stt.*;
 
 public class SuperPowersTest {
 

@@ -9,14 +9,18 @@ import java.util.LinkedList;
 /**
  * A collection of classes and of methods to extend the Java language itself, to get more stuff done with less code. <br/>
  * <br/>
- * Paste the following line of code into your classes for maximum power.<br/>
- * <pre>{@code import static jl95terceira.lang.SuperPowers.*;}</pre>
+ * Paste the following line of code into your classes<br/>
+ * <pre>{@code import static jl95terceira.lang.stt.*;}</pre>
+ * to call the methods directly like {@code strip(...)}, {@code ifNull(..., ...)}, etc.
+ * Paste
+ * <pre>{@code import jl95terceira.lang.stt.*;}</pre>
+ * to use static method reference syntax in more functional styles like {@code stt::strip}, {@code stt::ifNull}, etc.
  */
-public class SuperPowers {
+public class stt {
 
     private static java.util.Set<Character> _s = Set(' ','\t','\n','\r','\f');
     
-    private SuperPowers() {}
+    private stt() {}
     
     /**
      * Error thrown when sleep is interrupted from within {@link #sleep(java.lang.Long)} / {@link #sleep(java.lang.Long, java.util.function.BooleanSupplier, java.lang.Long)}
@@ -130,7 +134,7 @@ public class SuperPowers {
     public static void          sleep(Long      period) {
         
         try { Thread.sleep(period); }
-        catch (java.lang.InterruptedException exc) { throw new SuperPowers.SleepError(); }
+        catch (java.lang.InterruptedException exc) { throw new stt.SleepError(); }
     }
     /**
      * sleep for a duration, with the possibility of interrupting early
@@ -192,6 +196,7 @@ public class SuperPowers {
             throw new RuntimeException(ex);
         }
     }
+    public static <T> T         ifNull   (T x, T fallback) { return x != null? x: fallback; }
 
     /*PPJAVA
 

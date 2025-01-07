@@ -14,6 +14,9 @@ import java.util.Objects;
  */
 public abstract class DataClass {
     
+    protected String dataRepr() { return String.join(", ", I.of (data())
+                                                            .map(o -> format("%s", o))); }
+
     /**
      * define the data i.e the attributes of the data object
      * @return data
@@ -49,7 +52,6 @@ public abstract class DataClass {
      */
     @Override public String  toString() {
         
-        return format("%s(%s)", getClass().getName(), String.join(", ", I.of (data())
-                                                                         .map(o -> format("%s", o))));
+        return format("%s(%s)", getClass().getName(), dataRepr());
     }
 }

@@ -1,6 +1,6 @@
 package jl95terceira.lang;
 
-import static jl95terceira.lang.SuperPowers.*;
+import static jl95terceira.lang.stt.*;
 import jl95terceira.lang.variadic.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * A super-powered iterable. 
  * <br/>
- * Use static methods {@link jl95terceira.lang.SuperPowers#I(java.lang.Object...)} and {@link #of(java.lang.Iterable)} to obtain
+ * Use static methods {@link stt#I(java.lang.Object...)} and {@link #of(java.lang.Iterable)} to obtain
  * an iterable with various functional programming-oriented methods, such as {@link #map(jl95terceira.lang.variadic.Function1)} and {@link #reduce(java.lang.Object, jl95terceira.lang.variadic.Function2)}.
  * This interface also holds various other powerful static methods to perform common operations. 
  * 
@@ -358,7 +358,7 @@ public interface I <T> extends Iterable<T> {
         return () -> new Iterator<U>() {
 
             Iterator<T> it  = I.this.iterator();
-            Iterator<U> it_ = SuperPowers.<U>I().iterator();
+            Iterator<U> it_ = stt.<U>I().iterator();
 
             @Override public  boolean hasNext() {
 
