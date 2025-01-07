@@ -156,6 +156,9 @@ public class stt {
         sleep(period % periodPartial);
         return true;
     }
+    public static <T> T         self     (T      x) { return x; }
+    public static <T>
+                  Function0<T>  constant (T      x) { return () -> x; }
     public static Boolean       isBlank  (String s) {
         
         /* SWITCH:17 */
@@ -188,14 +191,31 @@ public class stt {
         /* END */
     }
     public static <T, E extends Exception>
-                  T             unchecked(ExceptFunction0<T, E> f) {
-        try {
-            return f.call();
-        }
-        catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
+                  Function0<T>  unchecked(ExceptFunction0<T, E> f) {
+        return () -> {
+            try {
+                return f.call();
+            }
+            catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        };
     }
+    public static <T, E extends Exception>
+                  T             uncheck  (ExceptFunction0<T, E> f) { return unchecked(f).call(); }
+    public static <E extends Exception>
+                  Method0       unchecked(ExceptMethod0<E> f) {
+        return () -> {
+            try {
+                f.call();
+            }
+            catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        };
+    }
+    public static <E extends Exception>
+                  void          uncheck  (ExceptMethod0<E> f) { unchecked(f).call(); }
     public static <T> T         ifNull   (T x, T fallback) { return x != null? x: fallback; }
 
     /*PPJAVA
