@@ -8,7 +8,7 @@
     <!--SWITCH:8-->
 <!--OFF:    <artifactId>batteries-8</artifactId>-->
     <!--END-->
-    <version>0.3.0</version>
+    <version>0.3.1</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -92,6 +92,6 @@
 <!--OFF:        <maven.compiler.source>8</maven.compiler.source>-->
 <!--OFF:        <maven.compiler.target>8</maven.compiler.target>-->
         <!--END-->
-        <project.github.path>github.com/jl95terceira/batteries-java</project.github.path>
+        <project.github.path>github.com/jl95/batteries-java</project.github.path>
     </properties>
 </project>
