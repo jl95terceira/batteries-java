@@ -5,22 +5,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * A collection of classes and of methods to extend the Java language itself, to get more stuff done with less code. <br/>
  * <br/>
  * Paste the following line of code into your classes<br/>
- * <pre>{@code import static jl95terceira.lang.stt.*;}</pre>
+ * <pre>{@code import static jl95.lang.SuperPowers.*;}</pre>
  * to call the methods directly like {@code strip(...)}, {@code ifNull(..., ...)}, etc.
  * Paste
- * <pre>{@code import jl95terceira.lang.stt.*;}</pre>
- * to use static method reference syntax in more functional styles like {@code stt::strip}, {@code stt::ifNull}, etc.
+ * <pre>{@code import jl95.lang.SuperPowers.*;}</pre>
+ * to use static method reference syntax in more functional styles like {@code SuperPowers::strip}, {@code SuperPowers::ifNull}, etc.
  */
-public class stt {
+public class SuperPowers {
 
     private static java.util.Set<Character> _s = Set(' ','\t','\n','\r','\f');
     
-    private stt() {}
+    private SuperPowers() {}
     
     /**
      * Error thrown when sleep is interrupted from within {@link #sleep(java.lang.Long)} / {@link #sleep(java.lang.Long, java.util.function.BooleanSupplier, java.lang.Long)}
@@ -134,7 +135,7 @@ public class stt {
     public static void          sleep(Long      period) {
         
         try { Thread.sleep(period); }
-        catch (java.lang.InterruptedException exc) { throw new stt.SleepError(); }
+        catch (java.lang.InterruptedException exc) { throw new SuperPowers.SleepError(); }
     }
     /**
      * sleep for a duration, with the possibility of interrupting early
@@ -156,9 +157,23 @@ public class stt {
         sleep(period % periodPartial);
         return true;
     }
+    @FunctionalInterface
+    public interface            SelfInterface {
+        <T> T apply(T x);
+    }
     public static <T> T         self     (T      x) { return x; }
+    public static SelfInterface self     = SuperPowers::self;
+    @FunctionalInterface
+    public interface            ConstantInterface {
+        <T> Function0<T> apply(T x);
+    }
     public static <T>
                   Function0<T>  constant (T      x) { return () -> x; }
+    public static ConstantInterface constant = SuperPowers::constant;
+    @FunctionalInterface
+    public interface            IsBlankInterface {
+        Boolean apply(String s);
+    }
     public static Boolean       isBlank  (String s) {
         
         /* SWITCH:17 */
@@ -172,6 +187,9 @@ public class stt {
 //OFF:        return true;
         /* END */
     }
+    public static IsBlankInterface isBlank = SuperPowers::isBlank;
+    @FunctionalInterface
+    public interface            StripInterface extends Function1<String, String> {}
     public static String        strip    (String s) {
         
         /* SWITCH:17 */
@@ -181,6 +199,9 @@ public class stt {
 //OFF:        return org.apache.commons.lang3.StringUtils.strip(s);
         /* END */
     }
+    public static StripInterface strip = SuperPowers::strip;
+    @FunctionalInterface
+    public interface            RepeatInterface extends Function2<String, String, Integer> {}
     public static String        repeat   (String s, Integer n) {
         
         /* SWITCH:17 */
@@ -190,6 +211,13 @@ public class stt {
 //OFF:        return org.apache.commons.lang3.StringUtils.repeat(s, n);
         /* END */
     }
+    public static RepeatInterface repeat = SuperPowers::repeat;
+    @FunctionalInterface
+    public interface            IfNullInterface {
+        <T> T apply(T x, T fallback);
+    }
+    public static <T> T         ifNull   (T x, T fallback) { return x != null? x: fallback; }
+    public static IfNullInterface ifNull = SuperPowers::ifNull;
     public static <T, E extends Exception>
                   Function0<T>  unchecked(ExceptFunction0<T, E> f) {
         return () -> {
@@ -216,7 +244,6 @@ public class stt {
     }
     public static <E extends Exception>
                   void          uncheck  (ExceptMethod0<E> f) { unchecked(f).call(); }
-    public static <T> T         ifNull   (T x, T fallback) { return x != null? x: fallback; }
 
     /*PPJAVA
 
