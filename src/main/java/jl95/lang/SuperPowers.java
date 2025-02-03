@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 
 /**
  * A collection of classes and of methods to extend the Java language itself, to get more stuff done with less code. <br/>
@@ -138,6 +139,13 @@ public class SuperPowers {
         catch (java.lang.InterruptedException exc) { throw new SuperPowers.SleepError(); }
     }
     /**
+     * same as {@link SuperPowers#sleep(Long)} with period of type {@link Integer}
+     */
+    public static void          sleep(Integer   period) {
+
+        sleep(period.longValue());
+    }
+    /**
      * sleep for a duration, with the possibility of interrupting early
      * @param period duration
      * @param stopEarly supplier of whether to interrupt
@@ -156,6 +164,16 @@ public class SuperPowers {
         }
         sleep(period % periodPartial);
         return true;
+    }
+    /**
+     * same as {@link SuperPowers#sleep(Long, BooleanSupplier, Long)} with period of type {@link Integer}
+     */
+    public static Boolean       sleep(Integer   period,
+                                      java.util.function.BooleanSupplier
+                                                stopEarly,
+                                      Long      periodPartial) {
+
+        return sleep(period.longValue(), stopEarly, periodPartial);
     }
     @FunctionalInterface
     public interface            SelfInterface {
