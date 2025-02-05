@@ -23,5 +23,16 @@ public interface ExceptFunction5<R, E extends Exception, A1, A2, A3, A4, A5> {
      * @return whatever
      * @throws E generic error
      */
-    public R call(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) throws E;
+    public R apply(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) throws E;
+    /**
+     * interface method
+     * @param a1 argument nr 1
+     * @param a2 argument nr 2
+     * @param a3 argument nr 3
+     * @param a4 argument nr 4
+     * @param a5 argument nr 5
+     * @return whatever
+     * @throws E generic error
+     */
+    default public R call(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) throws E { return apply(a1,a2,a3,a4,a5);}
 }

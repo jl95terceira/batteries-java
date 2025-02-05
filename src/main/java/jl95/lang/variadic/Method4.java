@@ -16,5 +16,15 @@ public interface Method4<A1, A2, A3, A4> {
      * @param a3 argument nr 3
      * @param a4 argument nr 4
      */
-    public void call(A1 a1, A2 a2, A3 a3, A4 a4);
+    public void accept(A1 a1, A2 a2, A3 a3, A4 a4);
+    /**
+     * interface method
+     * DEPRECATED - use accept(), instead
+     * @param a1 argument nr 1
+     * @param a2 argument nr 2
+     * @param a3 argument nr 3
+     * @param a4 argument nr 4
+     */
+    @Deprecated
+    default public void call(A1 a1, A2 a2, A3 a3, A4 a4) {accept(a1,a2,a3,a4);}
 }

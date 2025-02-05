@@ -12,5 +12,12 @@ public interface ExceptMethod1<E extends Exception, A1> {
      * @param a1 argument nr 1
      * @throws E generic error
      */
-    public void call(A1 a1) throws E;
+    public void accept(A1 a1) throws E;
+    /**
+     * interface method
+     * DEPRECATED - use accept(), instead
+     * @param a1 argument nr 1
+     * @throws E generic error
+     */
+    default public void call(A1 a1) throws E {accept(a1);}
 }

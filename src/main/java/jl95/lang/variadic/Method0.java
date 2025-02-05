@@ -10,5 +10,12 @@ public interface Method0 {
      * interface method
      * 
      */
-    public void call();
+    public void accept();
+    /**
+     * interface method
+     * DEPRECATED - use accept(), instead
+     * 
+     */
+    @Deprecated
+    default public void call() {accept();}
 }

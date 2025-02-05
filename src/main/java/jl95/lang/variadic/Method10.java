@@ -28,5 +28,21 @@ public interface Method10<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10> {
      * @param a9 argument nr 9
      * @param a10 argument nr 10
      */
-    public void call(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10);
+    public void accept(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10);
+    /**
+     * interface method
+     * DEPRECATED - use accept(), instead
+     * @param a1 argument nr 1
+     * @param a2 argument nr 2
+     * @param a3 argument nr 3
+     * @param a4 argument nr 4
+     * @param a5 argument nr 5
+     * @param a6 argument nr 6
+     * @param a7 argument nr 7
+     * @param a8 argument nr 8
+     * @param a9 argument nr 9
+     * @param a10 argument nr 10
+     */
+    @Deprecated
+    default public void call(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10) {accept(a1,a2,a3,a4,a5,a6,a7,a8,a9,a10);}
 }

@@ -16,5 +16,14 @@ public interface ExceptMethod3<E extends Exception, A1, A2, A3> {
      * @param a3 argument nr 3
      * @throws E generic error
      */
-    public void call(A1 a1, A2 a2, A3 a3) throws E;
+    public void accept(A1 a1, A2 a2, A3 a3) throws E;
+    /**
+     * interface method
+     * DEPRECATED - use accept(), instead
+     * @param a1 argument nr 1
+     * @param a2 argument nr 2
+     * @param a3 argument nr 3
+     * @throws E generic error
+     */
+    default public void call(A1 a1, A2 a2, A3 a3) throws E {accept(a1,a2,a3);}
 }

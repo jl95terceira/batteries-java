@@ -21,5 +21,17 @@ public interface Function5<R, A1, A2, A3, A4, A5> {
      * @param a5 argument nr 5
      * @return whatever
      */
-    public R call(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5);
+    public R apply(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5);
+    /**
+     * interface method
+     * DEPRECATED - use apply(), instead
+     * @param a1 argument nr 1
+     * @param a2 argument nr 2
+     * @param a3 argument nr 3
+     * @param a4 argument nr 4
+     * @param a5 argument nr 5
+     * @return whatever
+     */
+    @Deprecated
+    default public R call(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5) { return apply(a1,a2,a3,a4,a5);}
 }

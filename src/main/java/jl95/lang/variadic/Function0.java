@@ -13,5 +13,13 @@ public interface Function0<R> {
      * 
      * @return whatever
      */
-    public R call();
+    public R apply();
+    /**
+     * interface method
+     * DEPRECATED - use apply(), instead
+     * 
+     * @return whatever
+     */
+    @Deprecated
+    default public R call() { return apply();}
 }

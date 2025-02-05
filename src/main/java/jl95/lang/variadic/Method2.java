@@ -12,5 +12,13 @@ public interface Method2<A1, A2> {
      * @param a1 argument nr 1
      * @param a2 argument nr 2
      */
-    public void call(A1 a1, A2 a2);
+    public void accept(A1 a1, A2 a2);
+    /**
+     * interface method
+     * DEPRECATED - use accept(), instead
+     * @param a1 argument nr 1
+     * @param a2 argument nr 2
+     */
+    @Deprecated
+    default public void call(A1 a1, A2 a2) {accept(a1,a2);}
 }

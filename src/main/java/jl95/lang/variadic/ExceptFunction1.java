@@ -15,5 +15,12 @@ public interface ExceptFunction1<R, E extends Exception, A1> {
      * @return whatever
      * @throws E generic error
      */
-    public R call(A1 a1) throws E;
+    public R apply(A1 a1) throws E;
+    /**
+     * interface method
+     * @param a1 argument nr 1
+     * @return whatever
+     * @throws E generic error
+     */
+    default public R call(A1 a1) throws E { return apply(a1);}
 }
