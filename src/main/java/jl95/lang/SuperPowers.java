@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.Future;
 import java.util.function.BooleanSupplier;
 
 /**
@@ -21,8 +19,12 @@ import java.util.function.BooleanSupplier;
  */
 public class SuperPowers {
 
-    private static java.util.Set<Character> _s = Set(' ','\t','\n','\r','\f');
-    
+    private static Boolean SHUTTING_DOWN_FLAG = false;
+
+    static {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> { SHUTTING_DOWN_FLAG = true; }));
+    }
+
     private SuperPowers() {}
     
     /**
@@ -30,6 +32,7 @@ public class SuperPowers {
      */
     public static class SleepError extends RuntimeException { private SleepError() { super(); }}
 
+    public static Boolean SHUTTING_DOWN() { return SHUTTING_DOWN_FLAG; }
     /*** ITERATION ***/
     /**
      * convenient static method to turn an array /varargs into a super-powered iterable
