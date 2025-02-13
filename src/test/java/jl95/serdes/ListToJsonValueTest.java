@@ -2,7 +2,7 @@ package jl95.serdes;
 
 public class ListToJsonValueTest {
     
-    @org.junit.Test public void test_strings() {
+    @org.junit.Test public void testStrings() {
     
         java.util.List<String> list = new java.util.ArrayList<>();
         list.add("foobar");
@@ -10,7 +10,7 @@ public class ListToJsonValueTest {
         org.junit.Assert.assertEquals(list, ListOfStringFromJson.get().call
                                            (ListOfStringToJson  .get().call(list)));
     }
-    @org.junit.Test public void test_ints   () {
+    @org.junit.Test public void testInts   () {
     
         java.util.List<Integer> list = new java.util.ArrayList<>();
         list.add(123);
@@ -18,7 +18,7 @@ public class ListToJsonValueTest {
         org.junit.Assert.assertEquals(list, ListOfIntegerFromJson.get().call
                                            (ListOfIntegerToJson  .get().call(list)));
     }
-    @org.junit.Test public void test_longs  () {
+    @org.junit.Test public void testLongs  () {
     
         java.util.List<Long> list = new java.util.ArrayList<>();
         list.add(123L);

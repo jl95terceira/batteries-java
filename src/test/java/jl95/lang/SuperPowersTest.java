@@ -2,9 +2,11 @@ package jl95.lang;
 
 import static jl95.lang.SuperPowers.*;
 
+import java.util.Iterator;
+
 public class SuperPowersTest {
 
-    @org.junit.Test public void test_any() {
+    @org.junit.Test public void testAny() {
         
         org.junit.Assert.assertTrue (I(true,  true,  true,  true,  true) .any(x -> x)); /* all */
         org.junit.Assert.assertFalse(I(false, false, false, false, false).any(x -> x)); /* none */
@@ -12,7 +14,7 @@ public class SuperPowersTest {
         org.junit.Assert.assertTrue (I(true,  false, false, false, true) .any(x -> x)); /* last */
         org.junit.Assert.assertTrue (I(false, false, false, true , false).any(x -> x)); /* somewhere */
     }
-    @org.junit.Test public void test_all() {
+    @org.junit.Test public void testAll() {
         
         org.junit.Assert.assertFalse(I(false, false, false, false, false).all(x -> x)); /* none */
         org.junit.Assert.assertTrue (I(true,  true,  true,  true,  true) .all(x -> x)); /* all */
@@ -20,20 +22,28 @@ public class SuperPowersTest {
         org.junit.Assert.assertFalse(I(true,  true,  true,  true,  false).all(x -> x)); /* not last */
         org.junit.Assert.assertFalse(I(true,  true,  true,  false, true) .all(x -> x)); /* not somewhere */
     }
-    @org.junit.Test public void test_range  () {
-        
-        java.util.List<Integer> list     = new java.util.ArrayList<>();
-        int                     n        = 5;
-        for (Integer i = 0; i < n; i++) { list.add(i); }
+    @org.junit.Test public void testRange  () {
+
+        java.util.List<Integer> list = new java.util.ArrayList<>();
+        int n = 100;
+        for (Integer i = 0; i < n; i++) {
+            list.add(i);
+        }
         java.util.Iterator<Integer> range_it = I.range(n).iterator();
-        for (Integer i: list)           { org.junit.Assert.assertEquals(i, range_it.next()); }
-            list.clear();
-        int a        = 2;
-        for (Integer i = a; i < a+n; i++) { list.add(i); }
-            range_it = I.range(n).map(i -> a + i).iterator();
-        for (Integer i: list)           { org.junit.Assert.assertEquals(i, range_it.next()); }
+        for (Integer i: list) {
+            org.junit.Assert.assertEquals(i, range_it.next());
+        }
+        list.clear();
+        int a = 42;
+        for (Integer i = a; i < a+n; i++) {
+            list.add(i);
+        }
+        range_it = I.range(n).map(i -> a + i).iterator();
+        for (Integer i: list) {
+            org.junit.Assert.assertEquals(i, range_it.next());
+        }
     }
-    @org.junit.Test public void test_reduce () {
+    @org.junit.Test public void testReduce () {
         
         org.junit.Assert.assertEquals(Integer.valueOf(15),  I.range(5).map(i -> 1 + i).reduce(0,  (a, b) -> a + b));
         org.junit.Assert.assertEquals(Integer.valueOf(120), I.range(5).map(i -> 1 + i).reduce(1,  (a, b) -> a * b));
@@ -45,12 +55,12 @@ public class SuperPowersTest {
             org.junit.Assert.assertEquals("abc", ii.reduce("", (c, s) -> c+s));
         }
     }
-    @org.junit.Test public void test_apply  () {
+    @org.junit.Test public void testApply  () {
         
         org.junit.Assert.assertEquals(java.util.Arrays.asList("a", "b", "c"), I("a", "b", "c")
                 .apply(new java.util.LinkedList<>(), (x, l) -> l.add(x)));
     }
-    @org.junit.Test public void test_map    () {
+    @org.junit.Test public void testMap    () {
         
         org.junit.Assert.assertEquals(java.util.Arrays.asList(1, 2, 42), I("1", "2", "42")
                 .map(s -> Integer.valueOf(s))
@@ -65,7 +75,7 @@ public class SuperPowersTest {
             org.junit.Assert.assertEquals(3, ii.toList().size());
         }
     }
-    @org.junit.Test public void test_flatmap() {
+    @org.junit.Test public void testFlatmap() {
         
         org.junit.Assert.assertEquals(java.util.Arrays.asList("a", "b", "c", "d"), I(I("a", "b"), I("c", "d"))
                 .flatmap(x -> x)
@@ -89,7 +99,7 @@ public class SuperPowersTest {
             org.junit.Assert.assertEquals(4, ii.toList().size());
         }
     }
-    @org.junit.Test public void test_filter () {
+    @org.junit.Test public void testFilter () {
         
         org.junit.Assert.assertEquals(java.util.Arrays.asList("a", "b", "c"), I("a", "b", "c")
                 .filter(c -> true)
@@ -110,7 +120,7 @@ public class SuperPowersTest {
             org.junit.Assert.assertEquals(3, ii.toList().size());
         }
     }
-    @org.junit.Test public void test_enumer () {
+    @org.junit.Test public void testEnumer () {
         
         org.junit.Assert.assertEquals(List(
                 tuple(0, "a"), tuple(1, "b"), tuple(2, "c")
@@ -125,7 +135,7 @@ public class SuperPowersTest {
         ),      I(       "d",           "e",           "f").enumer
                  (3).toList());
     }
-    @org.junit.Test public void test_group  () {
+    @org.junit.Test public void testGroup  () {
         
         org.junit.Assert.assertEquals(
                 
@@ -144,7 +154,7 @@ public class SuperPowersTest {
                 I.group((String s) -> s.length(), I("a", "bbb", "cc", "", "aaa", "d"))
         );
     }
-    @org.junit.Test public void test_zip    () {
+    @org.junit.Test public void testZip    () {
         
         org.junit.Assert.assertEquals(
                 
@@ -162,5 +172,27 @@ public class SuperPowersTest {
                       I("coiso", 42 ), 
                       I("z",    "z")).toList()
         );
+    }
+    @org.junit.Test public void testCycle  () {
+        Iterator<String> it;
+        it = I("a","b","c").cycle().iterator();
+        for (String c: I("a", "b", "c",
+                      "a", "b", "c",
+                      "a", "b", "c",
+                      "a", "b", "c")) {
+            org.junit.Assert.assertTrue(it.hasNext());
+            org.junit.Assert.assertEquals(c, it.next());
+        }
+        it = I("a").cycle().iterator();
+        for (String c: I("a", "a", "a",
+                      "a", "a", "a",
+                      "a", "a", "a")) {
+            org.junit.Assert.assertTrue(it.hasNext());
+            org.junit.Assert.assertEquals(c, it.next());
+        }
+        for (int i=0; i < 10000; i++) {
+            org.junit.Assert.assertTrue(it.hasNext());
+            it.next();
+        }
     }
 }

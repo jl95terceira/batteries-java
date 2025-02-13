@@ -18,7 +18,7 @@ public class DataClassTest {
         @Override protected Iterable<?> data() { return I(this.answer); }
     }
     
-    @org.junit.Test public void test_equals() {
+    @org.junit.Test public void testEquals() {
         
         System.out.println(new Foo());
         System.out.println(new Universe());
@@ -43,7 +43,7 @@ public class DataClassTest {
             org.junit.Assert.assertEquals(bar2, bar);
         }
     }
-    @org.junit.Test public void test_hash  () {
+    @org.junit.Test public void testHash  () {
         
         System.out.println(new Foo());
         System.out.println(new Universe());

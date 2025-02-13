@@ -2,13 +2,7 @@ package jl95.lang;
 
 import static jl95.lang.SuperPowers.*;
 import jl95.lang.variadic.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A super-powered iterable. 
@@ -88,18 +82,18 @@ public interface I <T> extends Iterable<T> {
      * @param vv values
      * @return grouping of values by the keys returned by the given function - map of sets
      */
-    public static <K, V> java.util.Map<K, ? extends java.util.Set<V>>
+    public static <K, V> Map<K, ? extends Set<V>>
                              group(Function1<K, V>    f,
-                                   java.util.Set<V>   vv) {
+                                   Set<V>   vv) {
 
-        return I.of(vv).apply(new java.util.HashMap<>(), (v, map) -> {
+        return I.of(vv).apply(new HashMap<>(), (v, map) -> {
 
             K k                      = f.call(v);
-            java.util.Set<V> groupvv = map.containsKey(k)
+            Set<V> groupvv = map.containsKey(k)
                                      ? (map.get(k))
                                      : function(() -> {
               
-                                         java.util.Set<V> l = new java.util.HashSet<>();
+                                         Set<V> l = new HashSet<>();
                                          map.put(k, l);
                                          return l;
               
@@ -115,18 +109,18 @@ public interface I <T> extends Iterable<T> {
      * @param vv values
      * @return grouping of values by the keys returned by the given function - map of lists
      */
-    public static <K, V> java.util.Map<K, ? extends java.util.List<V>>
+    public static <K, V> Map<K, ? extends List<V>>
                              group(Function1<K, V>    f,
                                    Iterable<V>        vv) {
 
-        return I.of(vv).apply(new java.util.HashMap<>(), (v, map) -> {
+        return I.of(vv).apply(new HashMap<>(), (v, map) -> {
 
             K                 k       = f.call(v);
-            java.util.List<V> groupvv = map.containsKey(k)
+            List<V> groupvv = map.containsKey(k)
                                       ? (map.get(k))
                                       : function(() -> {
               
-                                          java.util.List<V> l = new java.util.ArrayList<>();
+                                          List<V> l = new ArrayList<>();
                                           map.put(k, l);
                                           return l;
               
@@ -140,17 +134,17 @@ public interface I <T> extends Iterable<T> {
      * @param xx values
      * @return zipped values, so that <code>[a1, a2, ..., an], [b1, b2, ..., bn], [c1, c2, ..., cn], ..., [z1, z2, ... zn]</code> becomes <code>[[a1, b1, ..., z1], [a2, b2, ..., z2], ..., [an, bn, ..., zn]]</code>. If an iterable is exhausted before the others, the zipping stops there. 
      */
-    public static <T> I<java.util.List<T>>
+    public static <T> I<List<T>>
                              zip  (Iterable<T>...     xx) {
 
-        return () -> new Iterator<java.util.List<T>>() {
+        return () -> new Iterator<List<T>>() {
 
             private final I<Iterator<T>> itt        = I.of(I(xx).map(x  -> x.iterator()).toList());
             private final I<Boolean>     itthasNext = itt  .map(it -> it.hasNext());
             private final I<T>           ittnext    = itt  .map(it -> it.next   ());
 
             @Override public boolean           hasNext() {return I.all(itthasNext);}
-            @Override public java.util.List<T> next   () {return ittnext.toList();}
+            @Override public List<T> next   () {return ittnext.toList();}
         };
     }
     /**
@@ -180,11 +174,10 @@ public interface I <T> extends Iterable<T> {
      * @param n number of times
      * @return finite iterable
      */
-    public static <T>    I<T>
-                             repeat(T                  v,
+    public static <T>    I<T> repeat(T                 v,
                                     Integer            n) {
         
-        return () -> new java.util.Iterator<T>() {
+        return () -> new Iterator<T>() {
          
             Integer i = 0;
             
@@ -199,12 +192,34 @@ public interface I <T> extends Iterable<T> {
      * @return infinite iterable
      */
     public static <T>    I<T>
-                             repeat(T                  v) {
+                              repeat(T                 v) {
         
-        return () -> new java.util.Iterator<T>() {
+        return () -> new Iterator<T>() {
             
             @Override public boolean hasNext() { return true; }
             @Override public T       next   () { return v; }
+        };
+    }
+    public static <T>    I<T> cycle (I<T>              xx) {
+        
+        return () -> new Iterator<>() {
+
+            List<T> xxList = I.of(xx).toList();
+            Iterator<T> it = xxList.iterator();
+
+            @Override
+            public boolean hasNext() {
+                return it.hasNext();
+            }
+
+            @Override
+            public T next() {
+                var x = it.next();
+                if (!it.hasNext()) {
+                    it = xxList.iterator();
+                }
+                return x;
+            }
         };
     }
 
@@ -381,6 +396,9 @@ public interface I <T> extends Iterable<T> {
             }
         };
     }
+    public default                             I<T>    cycle    () {
+        return cycle(this);
+    }
     /**
      * make a list from this iterable
      * @param <L> list type
@@ -434,7 +452,7 @@ public interface I <T> extends Iterable<T> {
      */
     public default                   ArrayList<T>      toList   () {
 
-        return to(new java.util.ArrayList<>());
+        return to(new ArrayList<>());
     }
     /**
      * return as (array) list, mapped by function
@@ -453,7 +471,7 @@ public interface I <T> extends Iterable<T> {
      */
     public default                   HashSet  <T>      toSet    () {
 
-        return to(new java.util.HashSet<>());
+        return to(new HashSet<>());
     }
     /**
      * return as (hash) map
@@ -466,7 +484,7 @@ public interface I <T> extends Iterable<T> {
     public default <K, V>            HashMap  <K, V>   toMap    (Function1<K, T>    k,
                                                                  Function1<V, T>    v) {
 
-        return to(new java.util.HashMap<>(), k, v);
+        return to(new HashMap<>(), k, v);
     }
     /**
      * return as (hash) map, where the values are this iterable's elements
