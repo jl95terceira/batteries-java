@@ -266,6 +266,10 @@ public class SuperPowers {
     }
     public static <E extends Exception>
                   void          uncheck  (ExceptMethod0<E> f) { unchecked(f).call(); }
+    public static <K, V>
+                  StrictMap<K, V> strict(java.util.Map<K, V> x) { return StrictMap.of(x); }
+    public static <T>
+                  StrictSet<T>    strict(java.util.Set<T>    x) { return StrictSet.of(x); }
 
     /*PPJAVA
 

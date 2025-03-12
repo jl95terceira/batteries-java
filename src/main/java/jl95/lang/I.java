@@ -420,6 +420,16 @@ public interface I <T> extends Iterable<T> {
         return apply(i, (x, set) -> set.add(x));
     }
     /**
+     * make a STRICT set from this iterable
+     * @param <S> set type
+     * @param i set to be populated
+     * @return set
+     */
+    public default        <S extends StrictSet<T>> S   to       (S                  i) {
+
+        return apply(i, (x, set) -> set.add(x));
+    }
+    /**
      * make a map from this iterable
      * @param <K> key type
      * @param <V> value type
@@ -434,6 +444,22 @@ public interface I <T> extends Iterable<T> {
                                                                  Function1<V, T>    v) {
 
         return apply(i, (x, map) -> map.put(k.call(x), v.call(x)));
+    }
+    /**
+     * make a map from this iterable
+     * @param <K> key type
+     * @param <V> value type
+     * @param <M> map type
+     * @param k key as function of each element
+     * @param v value as function of each element
+     * @param i map to be populated
+     * @return map
+     */
+    public default <K, V, M extends StrictMap<K, V>> M to       (M                  i,
+                                                                 Function1<K, T>    k,
+                                                                 Function1<V, T>    v) {
+
+        return apply(i, (x, map) -> map.put(k.apply(x), v.apply(x)));
     }
     /**
      * populate an array from this iterable
