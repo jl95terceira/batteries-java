@@ -2,9 +2,11 @@ package jl95.lang;
 
 import static jl95.lang.SuperPowers.*;
 
+import jl95.lang.variadic.Function1;
+
 public class Ref<T> extends DataClass {
 
-    public T value;
+    private T value;
 
     public Ref(T value) {this.value = value;}
     public Ref() {this(null);}
@@ -12,4 +14,8 @@ public class Ref<T> extends DataClass {
     @Override protected Iterable<?> data() {
         return I(value);
     }
+
+    public T    get() {return value;}
+    public void set(T x) {value = x;}
+    public void set(Function1<T, T> f) {value = f.apply(value);}
 }
