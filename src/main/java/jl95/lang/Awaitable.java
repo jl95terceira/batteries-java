@@ -1,29 +1,43 @@
 package jl95.lang;
 
-import static jl95.lang.SuperPowers.uncheck;
+import static jl95.lang.SuperPowers.*;
 
+import java.util.List;
 import java.util.concurrent.Future;
 
-public interface Awaitable extends Completable {
+public interface Awaitable<T> extends Completable {
 
-    void await();
+    T await();
 
-    static <T> Awaitable of(Future<? extends T> f) { return new Awaitable() {
+    default VoidAwaitable ignored() {
+        return new VoidAwaitable() {
+            @Override
+            public void await() {
+                Awaitable.this.await();
+            }
+            @Override
+            public Boolean isDone() {
+                return Awaitable.this.isDone();
+            }
+        };
+    }
+
+    static <T> Awaitable<T> of(Future<? extends T> f) { return new Awaitable<>() {
         @Override
-        public void await() {
-            uncheck(() -> f.get());
+        public T await() {
+            return uncheck(() -> f.get());
         }
         @Override
         public Boolean isDone() {
             return f.isDone();
         }
     }; }
-    static Awaitable joined(Iterable<? extends Awaitable> aa) {
+    static <T> Awaitable<List<T>> joined(Iterable<? extends Awaitable<T>> aa) {
 
-        return new Awaitable() {
+        return new Awaitable<>() {
             @Override
-            public void await() {
-                I.of(aa).forEach(Awaitable::await);
+            public List<T> await() {
+                return I.of(aa).map(Awaitable::await).toList();
             }
             @Override
             public Boolean isDone() {
