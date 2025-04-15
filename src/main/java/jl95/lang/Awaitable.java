@@ -1,23 +1,34 @@
 package jl95.lang;
 
-import static jl95.lang.SuperPowers.*;
+import static jl95.lang.SuperPowers.uncheck;
 
 import java.util.concurrent.Future;
 
-public interface Awaitable<T> {
+public interface Awaitable extends Completable {
 
-    T       await();
-    Boolean isDone();
+    void await();
 
-    static <T> Awaitable<T> of(Future<T> f) { return new Awaitable<T>() {
+    static <T> Awaitable of(Future<? extends T> f) { return new Awaitable() {
         @Override
-        public T await() {
-            return uncheck(() -> f.get());
+        public void await() {
+            uncheck(() -> f.get());
         }
-
         @Override
         public Boolean isDone() {
             return f.isDone();
         }
     }; }
+    static Awaitable joined(Iterable<? extends Awaitable> aa) {
+
+        return new Awaitable() {
+            @Override
+            public void await() {
+                I.of(aa).forEach(Awaitable::await);
+            }
+            @Override
+            public Boolean isDone() {
+                return I.all(I.of(aa).map(Awaitable::isDone));
+            }
+        };
+    }
 }
