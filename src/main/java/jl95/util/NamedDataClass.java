@@ -1,6 +1,5 @@
-package jl95.lang;
+package jl95.util;
 
-import jl95.util.*;
 import static java.lang.String.format;
 import java.util.Iterator;
 import jl95.lang.I;
@@ -13,9 +12,7 @@ import jl95.lang.variadic.*;
  * <li>2 objects of different data classes are not equal.</li>
  * <li>2 objects of the same data class and with the same attributes are equal and have the same hash code.</li>
  * </ul>
- * @deprecated Please use the class of the same name at package {@link jl95.util}
  */
-@Deprecated
 public abstract class NamedDataClass extends DataClass {
 
     protected abstract Iterable<Tuple2<String, ?>> namedData();

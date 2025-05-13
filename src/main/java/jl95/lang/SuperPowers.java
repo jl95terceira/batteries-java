@@ -1,5 +1,7 @@
 package jl95.lang;
 
+import jl95.util.StrictSet;
+import jl95.util.StrictMap;
 import jl95.lang.variadic.*;
 import java.util.ArrayList;
 import java.util.HashMap;

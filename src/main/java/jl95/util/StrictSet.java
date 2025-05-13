@@ -1,16 +1,10 @@
-package jl95.lang;
+package jl95.util;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Set;
 import jl95.lang.I;
 
-/**
- * 
- * @author João
- * @param <T>
- * @deprecated Please use the class of the same name at package {@link jl95.util}
- */
-@Deprecated
 public interface StrictSet<T> {
 
     boolean add(T t);

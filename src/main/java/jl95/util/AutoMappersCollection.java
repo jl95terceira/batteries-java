@@ -1,15 +1,8 @@
-package jl95.lang;
+package jl95.util;
 
-import jl95.util.AutoMapper;
 import jl95.util.StrictMap;
 import java.util.UUID;
 
-/**
- * 
- * @author João
- * @deprecated Please use the class of the same name at package {@link jl95.util}
- */
-@Deprecated
 public class AutoMappersCollection {
 
     public static <V> AutoMapper<Long, V> getSequentialAutoMapper(StrictMap<Long, V> map) {

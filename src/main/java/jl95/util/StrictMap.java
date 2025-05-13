@@ -1,19 +1,14 @@
-package jl95.lang;
+package jl95.util;
 
 import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiFunction;
 import jl95.lang.I;
 
-/**
- * 
- * @author João
- * @param <K>
- * @param <V>
- * @deprecated Please use the class of the same name at package {@link jl95.util}
- */
-@Deprecated
+import jl95.lang.variadic.Tuple2;
+
 public interface StrictMap<K, V> {
 
     V get(K key);

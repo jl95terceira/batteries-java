@@ -1,5 +1,6 @@
 package jl95.lang;
 
+import jl95.util.DataClass;
 import static jl95.lang.SuperPowers.*;
 
 public class DataClassTest {
