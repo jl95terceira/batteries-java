@@ -3,6 +3,7 @@ package jl95.lang;
 import static jl95.lang.SuperPowers.*;
 
 import jl95.lang.variadic.Function1;
+import jl95.util.DataClass;
 
 public class Ref<T> extends DataClass {
 

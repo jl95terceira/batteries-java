@@ -1,4 +1,6 @@
-package jl95.lang;
+package jl95.util;
+
+import jl95.lang.I;
 
 import static jl95.lang.SuperPowers.*;
 

@@ -3,11 +3,11 @@ package jl95.util;
 import java.time.Duration;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Set;
-import jl95.lang.Awaitable;
+
 import static jl95.lang.SuperPowers.strict;
 import static jl95.lang.SuperPowers.sleep;
 import static jl95.lang.SuperPowers.Set;
-import jl95.lang.VoidAwaitable;
+
 import jl95.lang.variadic.Method1;
 
 public class LifeMap<K> {

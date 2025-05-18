@@ -1,7 +1,5 @@
 package jl95.util;
 
-import jl95.util.StrictMap;
-
 public abstract class AutoMapper<K, V> {
 
     private final StrictMap<K, V> map;

@@ -2,7 +2,7 @@ package jl95.util;
 
 import java.util.concurrent.CompletableFuture;
 import static jl95.lang.SuperPowers.sleep;
-import jl95.lang.VoidAwaitable;
+
 import jl95.lang.variadic.Method0;
 
 public class ThreadedRunnable {
