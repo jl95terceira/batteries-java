@@ -1,6 +1,7 @@
 package jl95.lang;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +15,7 @@ public interface StrictList<T> extends I<T> {
     boolean contains(T o);
     int size();
     void clear();
+    void sort(Comparator<? super T> comparator);
 
     default boolean isEmpty() {
         return size() == 0;

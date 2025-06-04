@@ -4,6 +4,7 @@ import jl95.util.StrictSet;
 import jl95.util.StrictMap;
 import jl95.lang.variadic.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -273,10 +274,10 @@ public class SuperPowers {
     public static <T>
                   StrictList<T>   strict(java.util.List<T>   list) {
           return new StrictList<T>() {
-            @Override
-            public boolean add(T t) {
-                return list.add(t);
-            }
+                @Override
+                public boolean add(T t) {
+                    return list.add(t);
+                }
 
               @Override
               public T get(int index) {
@@ -312,7 +313,12 @@ public class SuperPowers {
             public void clear() {
                 list.clear();
             }
-        };
+
+              @Override
+              public void sort(Comparator<? super T> comparator) {
+                  list.sort(comparator);
+              }
+          };
     }
     public static <K, V>
                   StrictMap<K, V> strict(java.util.Map<K, V> map) {
