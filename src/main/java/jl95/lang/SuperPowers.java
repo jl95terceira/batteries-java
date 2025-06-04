@@ -278,7 +278,12 @@ public class SuperPowers {
                 return list.add(t);
             }
 
-            @Override
+              @Override
+              public T get(int index) {
+                  return list.get(index);
+              }
+
+              @Override
             public T set(int index, T element) {
                 return list.set(index, element);
             }

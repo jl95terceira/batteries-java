@@ -8,6 +8,7 @@ import java.util.Set;
 public interface StrictList<T> extends I<T> {
 
     boolean add(T t);
+    T get(int index);
     T set(int index, T element);
     boolean remove(T o);
     boolean contains(T o);
