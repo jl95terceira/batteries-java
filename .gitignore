@@ -4,3 +4,4 @@ __pycache__
 .vscode
 nbproject
 nbactions.xml
+nb-configuration.xml

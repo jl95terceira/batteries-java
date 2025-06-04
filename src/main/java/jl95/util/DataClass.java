@@ -1,8 +1,9 @@
-package jl95.lang;
+package jl95.util;
 
 import static java.lang.String.format;
 
 import java.util.Objects;
+import jl95.lang.I;
 
 /**
  * An abstract class to help implement data classes.

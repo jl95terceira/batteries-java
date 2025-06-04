@@ -1,10 +1,11 @@
-package jl95.lang;
+package jl95.util;
 
 import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
+import jl95.lang.I;
 
 import jl95.lang.variadic.Tuple2;
 

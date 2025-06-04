@@ -1,5 +1,6 @@
-package jl95.lang;
+package jl95.util;
 
+import jl95.util.StrictMap;
 import java.util.UUID;
 
 public class AutoMappersCollection {

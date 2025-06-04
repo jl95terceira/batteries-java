@@ -1,7 +1,8 @@
-package jl95.lang;
+package jl95.util;
 
 import static java.lang.String.format;
 import java.util.Iterator;
+import jl95.lang.I;
 import jl95.lang.variadic.*;
 
 /**

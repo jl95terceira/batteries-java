@@ -1,5 +1,7 @@
 package jl95.lang;
 
+import jl95.util.StrictMap;
+import jl95.util.StrictSet;
 import static jl95.lang.SuperPowers.*;
 import jl95.lang.variadic.*;
 import java.util.*;

@@ -1,4 +1,4 @@
-package jl95.lang;
+package jl95.util;
 
 public abstract class SdHooked {
 

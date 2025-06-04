@@ -1,8 +1,9 @@
-package jl95.lang;
+package jl95.util;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
+import jl95.lang.I;
 
 public interface StrictSet<T> extends I<T> {
 
