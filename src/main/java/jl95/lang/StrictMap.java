@@ -18,7 +18,8 @@ public interface StrictMap<K, V> {
     int size();
 
     default void clear() {
-        for (var k: keySet()) {
+
+        for (var k: I.of(keySet()).toSet()) {
             remove(k);
         }
     }
@@ -56,40 +57,5 @@ public interface StrictMap<K, V> {
             return null;
         }
         return get(key);
-    }
-
-    static <K, V> StrictMap<K, V> of(Map<K, V> map) {
-        return new StrictMap<>() {
-
-            @Override
-            public V get(K key) {
-                return map.get(key);
-            }
-
-            @Override
-            public V put(K key, V value) {
-                return map.put(key, value);
-            }
-
-            @Override
-            public V remove(K key) {
-                return map.remove(key);
-            }
-
-            @Override
-            public boolean containsKey(K key) {
-                return map.containsKey(key);
-            }
-
-            @Override
-            public Set<K> keySet() {
-                return map.keySet();
-            }
-
-            @Override
-            public int size() {
-                return map.size();
-            }
-        };
     }
 }
