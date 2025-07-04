@@ -8,7 +8,7 @@
     <!--SWITCH:8-->
 <!--OFF:    <artifactId>batteries-8</artifactId>-->
     <!--END-->
-    <version>0.17.4</version>
+    <version>0.17.5</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -42,7 +42,7 @@
                     <publishingServerId>central</publishingServerId>
                 </configuration>
             </plugin>
-            <plugin>
+            <!-- <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <version>3.2.7</version>
@@ -59,7 +59,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin> -->
         </plugins>
     </build>
     <name>${project.groupId}:${project.artifactId}</name>
