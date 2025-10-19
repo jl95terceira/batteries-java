@@ -1,17 +1,21 @@
-package jl95.util;
+package jl95.lang;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
-import jl95.lang.I;
 
-public interface StrictSet<T> extends I<T> {
+public interface StrictList<T> extends I<T> {
 
     boolean add(T t);
+    T get(int index);
+    T set(int index, T element);
     boolean remove(T o);
     boolean contains(T o);
     int size();
     void clear();
+    void sort(Comparator<? super T> comparator);
 
     default boolean isEmpty() {
         return size() == 0;
