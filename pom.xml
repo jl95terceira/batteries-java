@@ -8,7 +8,7 @@
     <!--SWITCH:8-->
 <!--OFF:    <artifactId>batteries-8</artifactId>-->
     <!--END-->
-    <version>0.16.0</version>
+    <version>0.17.0</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -42,24 +42,24 @@
                     <publishingServerId>central</publishingServerId>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.2.7</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                        <configuration>
-                            <keyname>${gpg.keyname}</keyname>
-                            <passphrase>${gpg.passphrase}</passphrase>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-gpg-plugin</artifactId>-->
+<!--                <version>3.2.7</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>sign-artifacts</id>-->
+<!--                        <phase>verify</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>sign</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <keyname>${gpg.keyname}</keyname>-->
+<!--                            <passphrase>${gpg.passphrase}</passphrase>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
         </plugins>
     </build>
     <name>${project.groupId}:${project.artifactId}</name>

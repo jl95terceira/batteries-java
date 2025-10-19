@@ -193,6 +193,9 @@ public class SuperPowers {
     }
     public static <T>
                   Function0<T>  constant (T      x) { return () -> x; }
+    public static Function0<Boolean> not(Function0<Boolean> f) {
+        return () -> !f.apply();
+    }
     public static ConstantInterface constant = SuperPowers::constant;
     @FunctionalInterface
     public interface            IsBlankInterface {
