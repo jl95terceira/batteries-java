@@ -5,11 +5,13 @@ import static jl95.lang.SuperPowers.*;
 import jl95.lang.variadic.Function1;
 import jl95.util.DataClass;
 
+@Deprecated
 public class Ref<T> extends DataClass {
 
     private T value;
 
     public Ref(T value) {this.value = value;}
+    @Deprecated
     public Ref() {this(null);}
 
     @Override protected Iterable<?> data() {
