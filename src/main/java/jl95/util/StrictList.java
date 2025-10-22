@@ -2,10 +2,14 @@ package jl95.util;
 
 import jl95.lang.I;
 
-public interface StrictSet<T> extends StrictImmutableSet<T> {
+import java.util.Comparator;
 
+public interface StrictList<T> extends StrictImmutableList<T> {
+
+    T set(int index, T element);
     boolean remove(T o);
     void clear();
+    void sort(Comparator<? super T> comparator);
 
     default boolean addAll(Iterable<? extends T> c) {
         var changed = false;

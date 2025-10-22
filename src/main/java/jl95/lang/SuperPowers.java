@@ -1,5 +1,6 @@
 package jl95.lang;
 
+import jl95.util.StrictList;
 import jl95.util.StrictSet;
 import jl95.util.StrictMap;
 import jl95.lang.variadic.*;
