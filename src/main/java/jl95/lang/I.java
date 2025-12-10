@@ -17,6 +17,16 @@ import java.util.*;
  */
 public interface I <T> extends Iterable<T> {
 
+    public static <T> I<T>   empty  () {
+        return () -> new Iterator<T>() {
+            @Override public boolean hasNext() {
+                return false;
+            }
+            @Override public T next() {
+                return null;
+            }
+        };
+    }
     /**
      * construct of a regular iterable
      * @param <T> type of elements
@@ -24,6 +34,13 @@ public interface I <T> extends Iterable<T> {
      * @return super-powered iterable
      */
     public static <T> I<T>   of     (Iterable<T>       xx) { return () -> xx.iterator(); }
+
+    /**
+     * construct of an array
+     * @param xx array
+     * @return super-powered iterable
+     * @param <T> type of elements
+     */
     public static <T> I<T>   ofArray(T[]               xx) { 
         
         return () -> new Iterator<T>() {
@@ -317,6 +334,17 @@ public interface I <T> extends Iterable<T> {
                 }
             }
         };
+    }
+
+    /**
+     * evaluate all elements of this iterable with a given function
+     * This is a terminal operation.
+     * @param f function to be applied
+     */
+    public default                             void    eval     (Method1<T>         f) {
+        for (var x: this) {
+            f.accept(x);
+        }
     }
     /**
      * apply all elements of this iterable to a value according to an applying function and return said value

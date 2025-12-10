@@ -4,7 +4,6 @@ import jl95.lang.I;
 
 public interface StrictImmutableSet<T> extends I<T> {
 
-    boolean add(T t);
     boolean contains(T o);
     int size();
 

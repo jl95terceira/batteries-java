@@ -3,6 +3,9 @@ package jl95.lang;
 import jl95.util.*;
 import jl95.lang.variadic.*;
 import jl95.util.StrictList;
+import jl95.util.impl.StrictListWithInternalNativeList;
+import jl95.util.impl.StrictMapWithInternalNativeMap;
+import jl95.util.impl.StrictSetWithInternalNativeSet;
 
 import java.util.*;
 import java.util.function.BooleanSupplier;
@@ -271,116 +274,16 @@ public class SuperPowers {
                   void          uncheck  (ExceptMethod0<E> f) { unchecked(f).call(); }
     public static <T>
                   StrictList<T>   strict(java.util.List<T>   list) {
-          return new StrictList<T>() {
-              @Override public boolean add(T t) {
-                return list.add(t);
-            }
-              @Override public T get(int index) {
-                  return list.get(index);
-              }
-              @Override public T set(int index, T element) {
-                    return list.set(index, element);
-                }
-              @Override public boolean remove(T o) {
-                    return list.remove(o);
-                }
-              @Override public boolean contains(T o) {
-                    return list.contains(o);
-                }
-              @Override public Iterator<T> iterator() {
-                    return list.iterator();
-                }
-              @Override public int size() {
-                    return list.size();
-                }
-              @Override public void clear() {
-                    list.clear();
-                }
-              @Override public void sort(Comparator<? super T> comparator) {
-                  list.sort(comparator);
-              }
-              @Override public String toString() {
-                  return "strict(%s)".formatted(list);
-              }
-              @Override public int hashCode() {
-                  return list.hashCode();
-              }
-              @Override public boolean equals(Object other) {
-                  return other instanceof StrictImmutableList<?> otherList
-                          ? (size() == otherList.size() && I.zip(this,otherList).all(t -> Objects.equals(t.a1,t.a2)))
-                          : list.equals(other);
-              }
-          };
+          return new StrictListWithInternalNativeList<>(list);
     }
     public static <K, V>
                   StrictMap<K, V> strict(java.util.Map<K, V> map) {
 
-        return new StrictMap<>() {
-            @Override public V get(K key) {
-                return map.get(key);
-            }
-            @Override public V put(K key, V value) {
-                return map.put(key, value);
-            }
-            @Override public V remove(K key) {
-                return map.remove(key);
-            }
-            @Override public boolean containsKey(K key) {
-                return map.containsKey(key);
-            }
-            @Override public Set<K> keySet() {
-                return map.keySet();
-            }
-            @Override public int size() {
-                return map.size();
-            }
-            @Override public String toString() {
-                return "strict(%s)".formatted(map);
-            }
-            @Override public int hashCode() {
-                return map.hashCode();
-            }
-            @Override public boolean equals(Object other) {
-                return other instanceof StrictImmutableMap<?,?> otherList
-                        ? (size() == otherList.size()
-                        && I(this.entrySet(),otherList.entrySet()).flatmap(xx -> xx).toSet().size() == size())
-                        : map.equals(other);
-            }
-        };
+        return new StrictMapWithInternalNativeMap<>(map);
     }
     public static <T>
                   StrictSet<T>    strict(java.util.Set<T>    set) {
-        return new StrictSet<T>() {
-            @Override public boolean add(T t) {
-                return set.add(t);
-            }
-            @Override public boolean remove(T o) {
-                return set.remove(o);
-            }
-            @Override public boolean contains(T o) {
-                return set.contains(o);
-            }
-            @Override public Iterator<T> iterator() {
-                return set.iterator();
-            }
-            @Override public int size() {
-                return set.size();
-            }
-            @Override public void clear() {
-                set.clear();
-            }
-            @Override public String toString() {
-                return "strict(%s)".formatted(set);
-            }
-            @Override public int hashCode() {
-                return set.hashCode();
-            }
-            @Override public boolean equals(Object other) {
-                return other instanceof StrictImmutableSet<?> otherList
-                        ? (size() == otherList.size() && I(this,otherList).flatmap(xx -> xx).toSet().size() == size())
-                        : set.equals(other);
-            }
-        };
+        return new StrictSetWithInternalNativeSet<>(set);
     }
 
     /*PPJAVA

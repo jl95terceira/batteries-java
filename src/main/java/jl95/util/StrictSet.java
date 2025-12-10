@@ -4,6 +4,7 @@ import jl95.lang.I;
 
 public interface StrictSet<T> extends StrictImmutableSet<T> {
 
+    boolean add(T t);
     boolean remove(T o);
     void clear();
 

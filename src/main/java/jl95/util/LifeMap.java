@@ -43,6 +43,9 @@ public class LifeMap<K> {
     public void put    (K key, Duration lifeSpan) {
         map.put(key, lifeSpan);
     }
+    public void remove(K key) {
+        map.remove(key);
+    }
     public VoidAwaitable start  () {
         return task.start();
     }

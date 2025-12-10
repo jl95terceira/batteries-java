@@ -1,13 +1,17 @@
 package jl95.util;
 
 import jl95.lang.I;
+import jl95.lang.variadic.Function1;
 
-import java.util.Comparator;
+import java.util.*;
 
 public interface StrictList<T> extends StrictImmutableList<T> {
 
     T set(int index, T element);
+    boolean add(T t);
+    void add(int index, T element);
     boolean remove(T o);
+    T remove(int index);
     void clear();
     void sort(Comparator<? super T> comparator);
 
