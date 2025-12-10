@@ -8,6 +8,7 @@ import jl95.util.impl.StrictMapWithInternalNativeMap;
 import jl95.util.impl.StrictSetWithInternalNativeSet;
 
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.function.BooleanSupplier;
 
 /**
@@ -284,6 +285,27 @@ public class SuperPowers {
     public static <T>
                   StrictSet<T>    strict(java.util.Set<T>    set) {
         return new StrictSetWithInternalNativeSet<>(set);
+    }
+    public static <A,B>
+                  Future<B>       mapped(Function1<B,A>      mapper,
+                                         Future<A>           future) {
+        return new Future<B>() {
+            @Override public boolean cancel(boolean mayInterruptIfRunning) {
+                return future.cancel(mayInterruptIfRunning);
+            }
+            @Override public boolean isCancelled() {
+                return future.isCancelled();
+            }
+            @Override public boolean isDone() {
+                return future.isDone();
+            }
+            @Override public B get() throws InterruptedException, ExecutionException {
+                return mapper.apply(future.get());
+            }
+            @Override public B get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
+                return mapper.apply(future.get(timeout, unit));
+            }
+        };
     }
 
     /*PPJAVA
