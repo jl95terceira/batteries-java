@@ -7,6 +7,7 @@ import static jl95.lang.SuperPowers.*;
 import java.util.List;
 import java.util.concurrent.Future;
 
+@Deprecated
 public interface Awaitable<T> extends Completable {
 
     T await();

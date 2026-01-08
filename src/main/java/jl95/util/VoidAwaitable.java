@@ -6,6 +6,7 @@ import static jl95.lang.SuperPowers.uncheck;
 
 import java.util.concurrent.Future;
 
+@Deprecated
 public interface VoidAwaitable extends Completable {
 
     void await();
