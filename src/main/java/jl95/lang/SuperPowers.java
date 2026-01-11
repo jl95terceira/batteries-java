@@ -307,6 +307,27 @@ public class SuperPowers {
             }
         };
     }
+    public static <A,B>
+                  UFuture<B>      mapped(Function1<B,A>      mapper,
+                                         UFuture<A>          future) {
+        return new UFuture<B>() {
+            @Override public boolean cancel(boolean mayInterruptIfRunning) {
+                return future.cancel(mayInterruptIfRunning);
+            }
+            @Override public boolean isCancelled() {
+                return future.isCancelled();
+            }
+            @Override public boolean isDone() {
+                return future.isDone();
+            }
+            @Override public B get() {
+                return mapper.apply(future.get());
+            }
+            @Override public B get(long timeout, TimeUnit unit) {
+                return mapper.apply(future.get(timeout, unit));
+            }
+        };
+    }
 
     /*PPJAVA
 
