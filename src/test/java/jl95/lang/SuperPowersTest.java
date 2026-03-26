@@ -58,7 +58,7 @@ public class SuperPowersTest {
         for (Integer i = 0; i < n; i++) {
             list.add(i);
         }
-        java.util.Iterator<Integer> range_it = I.range(n).iterator();
+        java.util.Iterator<Integer> range_it = Iterable.range(n).iterator();
         for (Integer i: list) {
             assertEquals(i, range_it.next());
         }
@@ -67,18 +67,18 @@ public class SuperPowersTest {
         for (Integer i = a; i < a+n; i++) {
             list.add(i);
         }
-        range_it = I.range(n).map(i -> a + i).iterator();
+        range_it = Iterable.range(n).map(i -> a + i).iterator();
         for (Integer i: list) {
             assertEquals(i, range_it.next());
         }
     }
     @org.junit.Test public void testReduce () {
         
-        assertEquals(Integer.valueOf(15),  I.range(5).map(i -> 1 + i).reduce(0,  (a, b) -> a + b));
-        assertEquals(Integer.valueOf(120), I.range(5).map(i -> 1 + i).reduce(1,  (a, b) -> a * b));
+        assertEquals(Integer.valueOf(15),  Iterable.range(5).map(i -> 1 + i).reduce(0,  (a, b) -> a + b));
+        assertEquals(Integer.valueOf(120), Iterable.range(5).map(i -> 1 + i).reduce(1,  (a, b) -> a * b));
         assertEquals("abc",                I("a", "b", "c").reduce("", (s, c) -> s + c));
         /* repeatable */
-        I<String> ii = I("a", "b", "c");
+        Iterable<String> ii = I("a", "b", "c");
         for (int i = 0; i < 10; i++) {
             
             assertEquals("abc", ii.reduce("", (c, s) -> c+s));
@@ -98,7 +98,7 @@ public class SuperPowersTest {
                 .map(s -> s.toUpperCase())
                 .to(new java.util.LinkedList<>()));
         /* repeatable */
-        I<String> ii = I("a", "b", "c").map(s -> s);
+        Iterable<String> ii = I("a", "b", "c").map(s -> s);
         for (int i = 0; i < 10; i++) {
             
             assertEquals(3, ii.toList().size());
@@ -122,7 +122,7 @@ public class SuperPowersTest {
                 .flatmap(x -> x)
                 .to(new java.util.LinkedList<>()));
         /* repeatable */
-        I<String> ii = I(I("a", "b"), I("c", "d")).flatmap(ss -> ss);
+        Iterable<String> ii = I(I("a", "b"), I("c", "d")).flatmap(ss -> ss);
         for (int i = 0; i < 10; i++) {
             
             assertEquals(4, ii.toList().size());
@@ -143,7 +143,7 @@ public class SuperPowersTest {
                 .filter(c -> !c.equals("c") && !c.equals("d"))
                 .to(new java.util.LinkedList<>()));
         /* repeatable */
-        I<String> ii = I("a", "b", "c").filter(s -> true);
+        Iterable<String> ii = I("a", "b", "c").filter(s -> true);
         for (int i = 0; i < 10; i++) {
             
             assertEquals(3, ii.toList().size());
@@ -153,15 +153,15 @@ public class SuperPowersTest {
         
         assertEquals(List(
                 tuple(0, "a"), tuple(1, "b"), tuple(2, "c")
-        ),      I(       "a",           "b",           "c").enumer
+        ),      I(       "a",           "b",           "c").enumerate
                  (0).toList());
         assertEquals(List(
                 tuple(0, "a"), tuple(1, "b"), tuple(2, "c")
-        ),      I(       "a",           "b",           "c").enumer
+        ),      I(       "a",           "b",           "c").enumerate
                  ( ).toList());
         assertEquals(List(
                 tuple(3, "d"), tuple(4, "e"), tuple(5, "f")
-        ),      I(       "d",           "e",           "f").enumer
+        ),      I(       "d",           "e",           "f").enumerate
                  (3).toList());
     }
     @org.junit.Test public void testGroup  () {
@@ -170,7 +170,7 @@ public class SuperPowersTest {
                 
                 Map(tuple("b", List("bcd", "bbb", "bcd")),
                     tuple("a", List("abc", "aaa"))),
-                I.group((String s) -> s.substring(0, 1), I(
+                Iterable.group((String s) -> s.substring(0, 1), I(
                                     "abc", "aaa", 
                                     "bcd", "bbb", "bcd"))
         );
@@ -180,7 +180,7 @@ public class SuperPowersTest {
                     tuple(1, List("a", "d")),
                     tuple(2, List("cc")),
                     tuple(3, List("bbb", "aaa"))),
-                I.group((String s) -> s.length(), I("a", "bbb", "cc", "", "aaa", "d"))
+                Iterable.group((String s) -> s.length(), I("a", "bbb", "cc", "", "aaa", "d"))
         );
     }
     @org.junit.Test public void testZip    () {
@@ -189,7 +189,7 @@ public class SuperPowersTest {
                 
                 List(List("foo","coiso","z"), 
                      List("bar","42",   "z")),
-                I.zip(I("foo",  "bar"), 
+                Iterable.zip(I("foo",  "bar"),
                       I("coiso","42"), 
                       I("z",    "z")).toList()
         );
@@ -197,7 +197,7 @@ public class SuperPowersTest {
                 
                 List(List("foo","coiso","z"), 
                      List("bar", 42 ,   "z")),
-                I.zip(I("foo",  "bar"), 
+                Iterable.zip(I("foo",  "bar"),
                       I("coiso", 42 ), 
                       I("z",    "z")).toList()
         );

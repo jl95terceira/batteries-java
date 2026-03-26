@@ -1,6 +1,6 @@
 package jl95.util;
 
-import jl95.lang.I;
+import jl95.lang.Iterable;
 
 import static jl95.lang.SuperPowers.*;
 
@@ -35,16 +35,16 @@ public interface Awaitable<T> extends Completable {
             return f.isDone();
         }
     }; }
-    static <T> Awaitable<List<T>> joined(Iterable<? extends Awaitable<T>> aa) {
+    static <T> Awaitable<List<T>> joined(java.lang.Iterable<? extends Awaitable<T>> aa) {
 
         return new Awaitable<>() {
             @Override
             public List<T> await() {
-                return I.of(aa).map(Awaitable::await).toList();
+                return Iterable.of(aa).map(Awaitable::await).toList();
             }
             @Override
             public Boolean isDone() {
-                return I.all(I.of(aa).map(Awaitable::isDone));
+                return Iterable.all(Iterable.of(aa).map(Awaitable::isDone));
             }
         };
     }

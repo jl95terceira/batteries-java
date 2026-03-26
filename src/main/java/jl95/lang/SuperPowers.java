@@ -37,6 +37,14 @@ public class SuperPowers {
     public static class SleepError extends RuntimeException { private SleepError() { super(); }}
 
     public static Boolean SHUTTING_DOWN() { return SHUTTING_DOWN_FLAG; }
+    /*** POINTER ***/
+    /**
+     *
+     * @param x
+     * @return pointer to x
+     * @param <T>
+     */
+    public static <T> Pointer<T> P(T x) { return new Pointer<>(x); }
     /*** ITERATION ***/
     /**
      * convenient static method to turn an array /varargs into a super-powered iterable
@@ -44,8 +52,7 @@ public class SuperPowers {
      * @param xx array / varargs
      * @return iterable with super-powers
      */
-    public static <T>    
-                  I<T>          I    (T...                   xx) { return I.ofArray(xx); }
+    public static <T> Iterable<T> I    (T...                   xx) { return Iterable.ofArray(xx); }
     /**
      * convenient static method to make a (array) list from the given elements
      * @param <T> element type
@@ -64,9 +71,9 @@ public class SuperPowers {
      * @return list
      */
     public static <T>
-                  ArrayList<T>  ListOf(Iterable<T>           xx) {
+                  ArrayList<T>  ListOf(java.lang.Iterable<T> xx) {
                       
-        return I.of(xx).to(new java.util.ArrayList<>());
+        return Iterable.of(xx).to(new java.util.ArrayList<>());
     }
     /**
      * convenient static method to make a (linked) list from the given elements
@@ -86,9 +93,9 @@ public class SuperPowers {
      * @return list
      */
     public static <T>
-                  LinkedList<T> LinkedListOf(Iterable<T>           xx) {
+                  LinkedList<T> LinkedListOf(java.lang.Iterable<T> xx) {
 
-        return I.of(xx).to(new java.util.LinkedList<>());
+        return Iterable.of(xx).to(new java.util.LinkedList<>());
     }
     /**
      * convenient static method to make a (hash) set from the given elements
@@ -108,9 +115,9 @@ public class SuperPowers {
      * @return list
      */
     public static <T>
-                  HashSet <T>   SetOf(Iterable<T>            xx) {
+                  HashSet <T>   SetOf(java.lang.Iterable<T> xx) {
                       
-        return I.of(xx).to(new java.util.HashSet<>());
+        return Iterable.of(xx).to(new java.util.HashSet<>());
     }
     /**
      * convenient static method to make a (hash) map from the given elements as key-value pairs
@@ -132,9 +139,9 @@ public class SuperPowers {
      * @return map
      */
     public static <K, V>
-                  HashMap<K, V> MapOf(Iterable<Tuple2<K, V>> xx) {
+                  HashMap<K, V> MapOf(java.lang.Iterable<Tuple2<K, V>> xx) {
         
-        return I.of(xx).to(new java.util.HashMap<>(), x -> x.a1, x -> x.a2);
+        return Iterable.of(xx).to(new java.util.HashMap<>(), x -> x.a1, x -> x.a2);
     }
     /**
      * sleep for a duration
@@ -165,7 +172,7 @@ public class SuperPowers {
                                                 stopEarly,
                                       Long      periodPartial) {
         
-        for (Integer i: I.range(Long.valueOf(period / periodPartial).intValue())) {
+        for (Integer i: Iterable.range(Long.valueOf(period / periodPartial).intValue())) {
             
             sleep(periodPartial);
             if (stopEarly.getAsBoolean()) return false;

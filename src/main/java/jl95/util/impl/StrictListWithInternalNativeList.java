@@ -1,6 +1,6 @@
 package jl95.util.impl;
 
-import jl95.lang.I;
+import jl95.lang.Iterable;
 import jl95.util.StrictImmutableList;
 import jl95.util.StrictList;
 
@@ -61,7 +61,7 @@ public class StrictListWithInternalNativeList<T> implements StrictList<T> {
     }
     @Override public boolean equals(Object other) {
         return other instanceof StrictImmutableList<?> otherList
-                ? (size() == otherList.size() && I.zip(this,otherList).all(t -> Objects.equals(t.a1,t.a2)))
+                ? (size() == otherList.size() && Iterable.zip(this,otherList).all(t -> Objects.equals(t.a1,t.a2)))
                 : list.equals(other);
     }
 }

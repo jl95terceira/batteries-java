@@ -1,6 +1,6 @@
 package jl95.util;
 
-import jl95.lang.I;
+import jl95.lang.Iterable;
 
 import static jl95.lang.SuperPowers.uncheck;
 
@@ -21,16 +21,16 @@ public interface VoidAwaitable extends Completable {
             return f.isDone();
         }
     }; }
-    static VoidAwaitable joined(Iterable<? extends VoidAwaitable> aa) {
+    static VoidAwaitable joined(java.lang.Iterable<? extends VoidAwaitable> aa) {
 
         return new VoidAwaitable() {
             @Override
             public void await() {
-                I.of(aa).forEach(VoidAwaitable::await);
+                Iterable.of(aa).forEach(VoidAwaitable::await);
             }
             @Override
             public Boolean isDone() {
-                return I.all(I.of(aa).map(VoidAwaitable::isDone));
+                return Iterable.all(Iterable.of(aa).map(VoidAwaitable::isDone));
             }
         };
     }

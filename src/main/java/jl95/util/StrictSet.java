@@ -1,6 +1,6 @@
 package jl95.util;
 
-import jl95.lang.I;
+import jl95.lang.Iterable;
 
 public interface StrictSet<T> extends StrictImmutableSet<T> {
 

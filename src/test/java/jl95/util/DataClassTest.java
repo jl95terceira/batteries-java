@@ -1,6 +1,6 @@
 package jl95.util;
 
-import jl95.lang.I;
+import jl95.lang.Iterable;
 
 import static jl95.lang.SuperPowers.*;
 
@@ -11,13 +11,13 @@ public class DataClassTest {
         public String foo = "foo";
         public String bar = "bar";
         
-        @Override protected Iterable<?> data() { return I(this.foo, this.bar); }
+        @Override protected java.lang.Iterable<?> data() { return I(this.foo, this.bar); }
     }
     public static class Universe extends DataClass {
         
         public Integer answer = 42;
 
-        @Override protected Iterable<?> data() { return I(this.answer); }
+        @Override protected java.lang.Iterable<?> data() { return I(this.answer); }
     }
     
     @org.junit.Test public void testEquals() {
@@ -33,7 +33,7 @@ public class DataClassTest {
         Universe bar = new Universe();
         bar.answer = bar.answer + 666;
         org.junit.Assert.assertNotEquals(bar,       new Universe());
-        for (int i: I.range(1000)) {
+        for (int i: Iterable.range(1000)) {
             
             foo.foo  = java.util.UUID.randomUUID().toString();
             Foo foo2 = new Foo();

@@ -1,6 +1,6 @@
 package jl95.util;
 
-import jl95.lang.I;
+import jl95.lang.Iterable;
 
 import java.util.AbstractMap;
 import java.util.Collection;
@@ -15,14 +15,14 @@ public interface StrictImmutableMap<K, V> {
     int size();
 
     default boolean containsValue(V value) {
-        return I.any(I.of(keySet()).map(k -> {
+        return Iterable.any(Iterable.of(keySet()).map(k -> {
             var v = get(k);
             if (v == null) return value == null;
             return get(k).equals(value);
         }));
     }
-    default Iterable<Map.Entry<K, V>> entrySet() {
-        return I.of(keySet()).map(k -> new AbstractMap.SimpleEntry<>(k, get(k)));
+    default java.lang.Iterable<Map.Entry<K, V>> entrySet() {
+        return Iterable.of(keySet()).map(k -> new AbstractMap.SimpleEntry<>(k, get(k)));
     }
     default boolean isEmpty() {
         for (var x: keySet()) {
@@ -31,7 +31,7 @@ public interface StrictImmutableMap<K, V> {
         return true;
     }
     default Collection<V> values() {
-        return I.of(keySet()).map(this::get).toList();
+        return Iterable.of(keySet()).map(this::get).toList();
     }
     default V getOrDefault(K key, V defaultValue) {
         if (!containsKey(key)) return defaultValue;

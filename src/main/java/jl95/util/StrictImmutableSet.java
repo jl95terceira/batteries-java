@@ -1,8 +1,8 @@
 package jl95.util;
 
-import jl95.lang.I;
+import jl95.lang.Iterable;
 
-public interface StrictImmutableSet<T> extends I<T> {
+public interface StrictImmutableSet<T> extends Iterable<T> {
 
     boolean contains(T o);
     int size();
@@ -10,7 +10,7 @@ public interface StrictImmutableSet<T> extends I<T> {
     default boolean isEmpty() {
         return size() == 0;
     }
-    default boolean containsAll(Iterable<? extends T> c) {
+    default boolean containsAll(java.lang.Iterable<? extends T> c) {
         for (var c_: c) {
             if (!contains(c_)) return false;
         }

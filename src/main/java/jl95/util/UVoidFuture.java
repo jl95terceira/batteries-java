@@ -2,12 +2,14 @@ package jl95.util;
 
 import static jl95.lang.SuperPowers.uncheck;
 
-import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import jl95.lang.I;
+import jl95.lang.Iterable;
 
+/**
+ * Unchecked Future that doesn't return a value. Like UFuture<Void>, but without the overhead of boxing and unboxing Void.
+ */
 public interface UVoidFuture {
 
     boolean cancel(boolean mayInterruptIfRunning);
@@ -38,28 +40,28 @@ public interface UVoidFuture {
     static <T> UVoidFuture of(Future<T> f) {
         return of(UFuture.of(f));
     }
-    static <T> UVoidFuture joined(Iterable<? extends UVoidFuture> aa) {
+    static <T> UVoidFuture joined(java.lang.Iterable<? extends UVoidFuture> aa) {
 
         return new UVoidFuture() {
             @Override
             public boolean cancel(boolean mayInterruptIfRunning) {
-                return I.of(aa).all(f -> f.cancel(mayInterruptIfRunning));
+                return Iterable.of(aa).all(f -> f.cancel(mayInterruptIfRunning));
             }
             @Override
             public boolean isCancelled() {
-                return I.of(aa).all(UVoidFuture::isCancelled);
+                return Iterable.of(aa).all(UVoidFuture::isCancelled);
             }
             @Override
             public boolean isDone() {
-                return I.all(I.of(aa).map(UVoidFuture::isDone));
+                return Iterable.all(Iterable.of(aa).map(UVoidFuture::isDone));
             }
             @Override
             public void get() {
-                I.of(aa).forEach(UVoidFuture::get);
+                Iterable.of(aa).forEach(UVoidFuture::get);
             }
             @Override
             public void get(long timeout, TimeUnit unit) {
-                I.of(aa).forEach(f -> f.get(timeout, unit));
+                Iterable.of(aa).forEach(f -> f.get(timeout, unit));
             }
         };
     }

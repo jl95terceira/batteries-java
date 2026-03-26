@@ -1,7 +1,6 @@
 package jl95.util;
 
-import jl95.lang.I;
-import jl95.lang.variadic.Function1;
+import jl95.lang.Iterable;
 
 import java.util.*;
 

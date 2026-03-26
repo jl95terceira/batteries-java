@@ -1,6 +1,6 @@
 package jl95.util;
 
-import jl95.lang.I;
+import jl95.lang.Iterable;
 
 import static jl95.lang.SuperPowers.uncheck;
 
@@ -11,8 +11,8 @@ public interface Completable {
     Boolean isDone();
 
     static <T> Completable of(Future<? extends T> f) { return f::isDone; }
-    static Completable joined(Iterable<? extends Completable> aa) {
+    static Completable joined(java.lang.Iterable<? extends Completable> aa) {
 
-        return () -> I.all(I.of(aa).map(Completable::isDone));
+        return () -> Iterable.all(Iterable.of(aa).map(Completable::isDone));
     }
 }

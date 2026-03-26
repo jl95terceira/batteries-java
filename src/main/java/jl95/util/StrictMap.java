@@ -1,13 +1,6 @@
 package jl95.util;
 
-import java.util.AbstractMap;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
-import java.util.function.BiFunction;
-import jl95.lang.I;
-
-import jl95.lang.variadic.Tuple2;
+import jl95.lang.Iterable;
 
 public interface StrictMap<K, V> extends StrictImmutableMap<K, V> {
 
@@ -16,7 +9,7 @@ public interface StrictMap<K, V> extends StrictImmutableMap<K, V> {
 
     default void clear() {
 
-        for (var k: I.of(keySet()).toSet()) {
+        for (var k: Iterable.of(keySet()).toSet()) {
             remove(k);
         }
     }

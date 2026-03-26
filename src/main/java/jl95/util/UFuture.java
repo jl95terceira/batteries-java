@@ -6,8 +6,12 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import jl95.lang.I;
+import jl95.lang.Iterable;
 
+/**
+ * Unchecked Future. Like Future, but get() and get(timeout, unit) throw unchecked exceptions instead of checked ones.
+ * @param <T>
+ */
 public interface UFuture<T> {
 
     boolean cancel(boolean mayInterruptIfRunning);
@@ -39,28 +43,28 @@ public interface UFuture<T> {
             }
         };
     }
-    static <T> UFuture<List<T>> joined(Iterable<? extends UFuture<T>> aa) {
+    static <T> UFuture<List<T>> joined(java.lang.Iterable<? extends UFuture<T>> aa) {
 
         return new UFuture<>() {
             @Override
             public boolean cancel(boolean mayInterruptIfRunning) {
-                return I.of(aa).all(f -> f.cancel(mayInterruptIfRunning));
+                return Iterable.of(aa).all(f -> f.cancel(mayInterruptIfRunning));
             }
             @Override
             public boolean isCancelled() {
-                return I.of(aa).all(UFuture::isCancelled);
+                return Iterable.of(aa).all(UFuture::isCancelled);
             }
             @Override
             public boolean isDone() {
-                return I.all(I.of(aa).map(UFuture::isDone));
+                return Iterable.all(Iterable.of(aa).map(UFuture::isDone));
             }
             @Override
             public List<T> get() {
-                return I.of(aa).map(UFuture::get).toList();
+                return Iterable.of(aa).map(UFuture::get).toList();
             }
             @Override
             public List<T> get(long timeout, TimeUnit unit) {
-                return I.of(aa).map(f -> f.get(timeout, unit)).toList();
+                return Iterable.of(aa).map(f -> f.get(timeout, unit)).toList();
             }
         };
     }

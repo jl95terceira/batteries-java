@@ -2,7 +2,7 @@ package jl95.util;
 
 import static java.lang.String.format;
 import java.util.Iterator;
-import jl95.lang.I;
+import jl95.lang.Iterable;
 import jl95.lang.variadic.*;
 
 /**
@@ -15,9 +15,9 @@ import jl95.lang.variadic.*;
  */
 public abstract class NamedDataClass extends DataClass {
 
-    protected abstract Iterable<Tuple2<String, ?>> namedData();
+    protected abstract java.lang.Iterable<Tuple2<String, ?>> namedData();
 
-    @Override protected Iterable<?> data() {
+    @Override protected java.lang.Iterable<?> data() {
         var namedDataIterator = namedData().iterator();
         return () -> new Iterator<>() {
 
@@ -25,6 +25,6 @@ public abstract class NamedDataClass extends DataClass {
             @Override public Object  next   () { return namedDataIterator.next   ().a2; }
         };
     }
-    @Override protected String dataRepr() { return String.join(", ", I.of (namedData())
+    @Override protected String dataRepr() { return String.join(", ", Iterable.of (namedData())
                                                          .map(o -> format("%s = %s", o.a1, o.a2))); }
 }

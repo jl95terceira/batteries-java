@@ -3,7 +3,7 @@ package jl95.util;
 import static java.lang.String.format;
 
 import java.util.Objects;
-import jl95.lang.I;
+import jl95.lang.Iterable;
 
 /**
  * An abstract class to help implement data classes.
@@ -15,14 +15,14 @@ import jl95.lang.I;
  */
 public abstract class DataClass {
     
-    protected String dataRepr() { return String.join(", ", I.of (data())
+    protected String dataRepr() { return String.join(", ", Iterable.of (data())
                                                             .map(o -> format("%s", o))); }
 
     /**
      * define the data i.e the attributes of the data object
      * @return data
      */
-    protected abstract Iterable<?> data();
+    protected abstract java.lang.Iterable<?> data();
     
     /**
      * (implemented automatically according to the return of {@link #data()})
@@ -30,8 +30,8 @@ public abstract class DataClass {
      */
     @Override public int     hashCode() {
         
-        return I.of    (this.data())
-                .enumer()
+        return Iterable.of    (this.data())
+                .enumerate()
                 .reduce(1, (hc, t) -> hc + t.a1*Objects.hashCode(t.a2));
     }
     /**
@@ -44,7 +44,7 @@ public abstract class DataClass {
         if (obj         == null)          return false;
         if (getClass() != obj.getClass()) return false;
         final DataClass other = (DataClass) obj;
-        return I.all(I.zip(this.data(), other.data())
+        return Iterable.all(Iterable.zip(this.data(), other.data())
                       .map(t -> Objects.equals(t.a1, t.a2)));
     }
     /**
