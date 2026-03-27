@@ -1,0 +1,25 @@
+package {clas_pkg};
+
+import jl95.util.DataClass;
+
+import static jl95.lang.SuperPowers.I;
+/**
+ * A pointer to a value of {value_type_description}. This is useful for simulating pass-by-reference in Java, or for creating mutable references to values.{extra_javadoc}
+ */
+public class {clas_repr} extends DataClass {{
+
+{applier_function}
+    private {value_type} value;
+
+    public {clas_name}({value_type} value) {{this.value = value;}}
+
+    @Override protected Iterable<?> data() {{
+        return I(value);
+    }}
+
+    public {value_type} get() {{return value;}}
+    public void set({value_type} x) {{value = x;}}
+    public void apply({applier_function_repr} f) {{
+        set(f.apply(get()));
+    }}
+}}

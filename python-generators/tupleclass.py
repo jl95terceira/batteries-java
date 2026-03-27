@@ -28,11 +28,11 @@ def main():
 
         class_code     :str = ''
         class_code         += 'package {0};\n\n'.format(VARIADIC_CLASSES_JAVA_PACKAGE)
-        for STATIC_IMPORT in SUPERPOWER_STATIC_IMPORTS:
+        for STATIC_IMPORT in STATIC_IMPORTS:
 
             class_code += f'import static {STATIC_IMPORT};\n'
 
-        for IMPORT in SUPERPOWER_IMPORTS:
+        for IMPORT in IMPORTS:
 
             class_code += f'import {IMPORT};\n\n'
 
@@ -51,7 +51,7 @@ def main():
 
         class_code         += '\n    /**\n{0}\n     */'.format('\n'.join(map(lambda j: '     * @param {1} element {0}'.format(1+j, ARG_NAME(j)), range(i))))
         class_code         += '\n    public {0}({1}) {{{2}}}'.format(CLASS_NAME(i), ', '.join(map(ARG, range(i))), ' '.join(map(lambda j: 'this.{0} = {0};'.format(ARG_NAME(j)), range(i)))) + '\n'
-        class_code         += '\n    @Override public Iterable<?> data() {{ return I({0}); }}'.format(', '.join(map(ARG_NAME, range(i))))
+        class_code         += '\n    @Override public java.lang.Iterable<?> data() {{ return I({0}); }}'.format(', '.join(map(ARG_NAME, range(i))))
 #        class_code         += '\n    @Override public int     hashCode() {{Integer hash = 29; {0} return hash;}}'.format(' '.join(map(lambda j: 'hash += 37*hash + java.util.Objects.hashCode(this.{0});'.format(ARG_NAME(j)), range(i))))
 #        class_code         += '\n    @Override public boolean equals  (Object obj) {{if (this == obj) return true; if (obj == null) return false; if (getClass() != obj.getClass()) return false; final {0} other = ({0}) obj;'.format(CLASS_TYPE(i)) + ' '.join(map(lambda j: 'if (!java.util.Objects.equals(this.{0}, other.{0})) return false;'.format(ARG_NAME(j)), range(i))) + 'return true;}'
 #        class_code         += '\n    @Override public String  toString() {{return "{0}({1})".formatted({2});}}'.format(CLASS_NAME(i), ', '.join(['%s']*i), ', '.join(map(lambda j: 'this.{0}'.format(ARG_NAME(j)), range(i))))
@@ -72,6 +72,6 @@ def main():
 if __name__ == '__main__':
 
     import argparse
-    p = argparse.ArgumentParser(description='Generate Java Tuple classes for various cases - poor man\'s variadic tuples\nThis devtool will be replaced and removed soon.')
+    p = argparse.ArgumentParser(description='Generate Java Tuple classes for various cases - poor man\'s variadic tuples')
     p.parse_args()
     main()

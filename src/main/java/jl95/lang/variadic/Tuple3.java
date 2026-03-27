@@ -1,8 +1,9 @@
 package jl95.lang.variadic;
 
-import jl95.util.DataClass;
 import static jl95.lang.SuperPowers.*;
 import jl95.lang.*;
+
+import jl95.util.DataClass;
 
 /**
  * Tuple with 3 elements.
@@ -31,5 +32,5 @@ public class Tuple3<A1, A2, A3> extends DataClass {
      */
     public Tuple3(A1 a1, A2 a2, A3 a3) {this.a1 = a1; this.a2 = a2; this.a3 = a3;}
 
-    @Override public Iterable<?> data() { return I(a1, a2, a3); }
+    @Override public java.lang.Iterable<?> data() { return I(a1, a2, a3); }
 }

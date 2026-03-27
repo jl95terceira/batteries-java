@@ -1,0 +1,5 @@
+    public interface {clas_repr}{{
+    
+        {value_type} apply({value_type} currentValue);
+    }}
+    

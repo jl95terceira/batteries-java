@@ -93,6 +93,6 @@ def main():
 if __name__ == '__main__':
 
     import argparse
-    p = argparse.ArgumentParser(description='Generate Java function interfaces for various cases - poor man\'s variadic functions\nThis devtool will be replaced and removed soon.')
+    p = argparse.ArgumentParser(description='Generate Java function interfaces for various cases - poor man\'s variadic functions')
     p.parse_args()
     main()

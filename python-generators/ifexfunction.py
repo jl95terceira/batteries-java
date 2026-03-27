@@ -97,6 +97,6 @@ if __name__ == '__main__':
 
     import argparse
 
-    p = argparse.ArgumentParser(description='Generate Java functions that may throw Exceptions\nThis devtool will be replaced and removed soon.')
+    p = argparse.ArgumentParser(description='Generate Java functions that may throw Exceptions')
     p.parse_args()
     main()

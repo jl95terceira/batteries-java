@@ -1,8 +1,9 @@
 package jl95.lang.variadic;
 
-import jl95.util.DataClass;
 import static jl95.lang.SuperPowers.*;
 import jl95.lang.*;
+
+import jl95.util.DataClass;
 
 /**
  * Tuple with 1 elements.
@@ -19,5 +20,5 @@ public class Tuple1<A1> extends DataClass {
      */
     public Tuple1(A1 a1) {this.a1 = a1;}
 
-    @Override public Iterable<?> data() { return I(a1); }
+    @Override public java.lang.Iterable<?> data() { return I(a1); }
 }

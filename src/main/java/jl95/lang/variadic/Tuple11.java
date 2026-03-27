@@ -1,8 +1,9 @@
 package jl95.lang.variadic;
 
-import jl95.util.DataClass;
 import static jl95.lang.SuperPowers.*;
 import jl95.lang.*;
+
+import jl95.util.DataClass;
 
 /**
  * Tuple with 11 elements.
@@ -79,5 +80,5 @@ public class Tuple11<A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11> extends DataC
      */
     public Tuple11(A1 a1, A2 a2, A3 a3, A4 a4, A5 a5, A6 a6, A7 a7, A8 a8, A9 a9, A10 a10, A11 a11) {this.a1 = a1; this.a2 = a2; this.a3 = a3; this.a4 = a4; this.a5 = a5; this.a6 = a6; this.a7 = a7; this.a8 = a8; this.a9 = a9; this.a10 = a10; this.a11 = a11;}
 
-    @Override public Iterable<?> data() { return I(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11); }
+    @Override public java.lang.Iterable<?> data() { return I(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11); }
 }

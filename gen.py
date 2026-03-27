@@ -15,7 +15,8 @@ def main():
             'ifexmethod',
             'iffunction',
             'ifmethod',
-            'tupleclass'
+            'tupleclass',
+            'pointerclass',
         ):
             os.system(f'python {generator_name}.py')
     finally:
